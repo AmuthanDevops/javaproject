@@ -51,7 +51,7 @@ pipeline {
            steps {
             sshagent(['shhtok8master']) {
             sh "scp -o StrictHostKeyChecking=no java-app-deployment.yaml ec2-user@3.110.195.3:/home/ec2-user"
-
+           
             script {
                 try{
                   sh "ssh ec2-user@3.110.195.3 kubectl create -f ."
