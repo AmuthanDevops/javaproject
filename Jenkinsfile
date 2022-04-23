@@ -50,15 +50,15 @@ pipeline {
 	    stage('Deploy App on k8s') {
            steps {
             sshagent(['shhtok8master']) {
-            sh "ssh ec2-user@3.110.195.3 kubectl delete -f java-app-deployment.yaml"
-            sh "ssh ec2-user@3.110.195.3 rm -rf /home/ec2-user/java-app-deployment.yaml"
+            sh "kubectl delete -f java-app-deployment.yaml"
+            sh "rm -rf /home/ec2-user/java-app-deployment.yaml"
             sh "scp -o StrictHostKeyChecking=no java-app-deployment.yaml ec2-user@3.110.195.3:/home/ec2-user"
            
             script {
                 try{
-                  sh "ssh ec2-user@3.110.195.3 kubectl create -f ."
+                  sh "ssh ec2-user@3.110.195.3 kubectl apply -f ."
                 }catch(error){
-                    sh "ssh ec2-user@3.110.195.3 kubectl create -f ."
+                    sh "ssh ec2-user@3.110.195.3 kubectl apply -f ."
             }
 }
         }
