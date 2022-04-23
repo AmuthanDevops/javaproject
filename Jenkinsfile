@@ -49,7 +49,7 @@ pipeline {
       }
 	    stage('Deploy App on k8s') {
            steps {
-            sshagent(['ssh-k8s-master']) {
+            sshagent(['shhtok8master']) {
             sh "scp -o StrictHostKeyChecking=no java-app-deploymenet ec2-user@15.206.145.14:/home/ec2-user"
 
             script {
